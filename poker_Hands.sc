@@ -15,7 +15,7 @@ object poker{
         var rank = ranks.indexWhere(_ == score._1)
         if (hand.map(_.charAt(1)).toSet.size == 1) rank = 5 // flush
         if (straights.contains(handValues.sorted.reverse.take(5))) rank = if (rank == 5) 8 else 4 // straight or straight flush
-        if (score._2.head==14) rank= if(rank==8) 9 else rank
+        if (score._2.head== 14) rank= if(rank==8) 9 else rank
         (rank, score._1,score._2)
     }
     def comparer(s1:(Int, List[Int],List[Int]),s2:(Int, List[Int],List[Int])):Int={
