@@ -25,20 +25,19 @@ object Poker {
       val valueChar = s.charAt(0)
       val suitChar = s.charAt(1)
       val value = valueChar match {
-        case '2' => 2
-        case '3' => 3
-        case '4' => 4
-        case '5' => 5
-        case '6' => 6
-        case '7' => 7
-        case '8' => 8
-        case '9' => 9
         case 'T' => 10
         case 'J' => 11
         case 'Q' => 12
         case 'K' => 13
         case 'A' => 14
-        case _ => throw new IllegalArgumentException(s"Invalid card value: $valueChar")
+        case '9' => 9
+        case '8' => 8
+        case '7' => 7
+        case '6' => 6
+        case '5' => 5
+        case '4' => 4
+        case '3' => 3
+        case '2' => 2
       }
       val suit = Suit.fromChar(suitChar)
       Card(value, suit)
