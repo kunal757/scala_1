@@ -2,18 +2,17 @@ object SpiralDiagonalSum {
   def diagonalSum(size: Int): Int = {
     require(size % 2 == 1, "Size must be an odd number.")
 
-    var sum = 1 // Starting with the center of the spiral
-    var currentNumber = 1
-
-    for (layer <- 3 to size by 2) {
-      val layerIncrement = layer - 1
-      for (_ <- 1 to 4) {
-        currentNumber += layerIncrement
-        sum += currentNumber
+    // Recursive function to calculate the sum of diagonals
+    def calculateSum(currentSize: Int, currentNumber: Int, acc: Int): Int = {
+      if (currentSize > size) acc
+      else {
+        val layerIncrement = currentSize - 1
+        val layerSum = (1 to 4).map(i => currentNumber + layerIncrement * i).sum
+        calculateSum(currentSize + 2, currentNumber + layerIncrement * 4, acc + layerSum)
       }
     }
 
-    sum
+    calculateSum(3, 1, 1) // Start from layer 3 with initial sum of 1
   }
 
   def main(args: Array[String]): Unit = {
@@ -22,4 +21,3 @@ object SpiralDiagonalSum {
     println(s"The sum of the numbers on the diagonals in a $size by $size spiral is $sumOfDiagonals")
   }
 }
-
