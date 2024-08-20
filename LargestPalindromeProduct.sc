@@ -6,19 +6,16 @@ object LargestPalindromeProduct {
   }
 
   def main(args: Array[String]): Unit = {
-    var largestPalindrome = 0
+    // Generate all possible products of two 3-digit numbers using a for-yield loop
+    val palindromes = for {
+      i <- 100 to 999
+      j <- i to 999 // j starts from i to avoid duplicate calculations
+      product = i * j if isPalindrome(product)
+    } yield product
 
-    // Iterate over all possible products of two 3-digit numbers
-    for (i <- 999 to 100 by -1) {
-      for (j <- i to 100 by -1) { // j starts from i to avoid duplicate calculations
-        val product = i * j
-        if (isPalindrome(product) && product > largestPalindrome) {
-          largestPalindrome = product
-        }
-      }
-    }
+    // Find the maximum palindrome
+    val largestPalindrome = palindromes.max
 
     println(s"The largest palindrome made from the product of two 3-digit numbers is $largestPalindrome")
   }
 }
-
