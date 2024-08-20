@@ -1,24 +1,13 @@
 object LargestPrimeFactor {
   def largestPrimeFactor(n: Long): Long = {
-    var num = n
-    var largestFactor = 1L
-    var i = 2L
-
-    while (i * i <= num) {
-      if (num % i == 0) {
-        largestFactor = i
-        while (num % i == 0) {
-          num /= i
-        }
-      }
-      i += 1
+    @scala.annotation.tailrec
+    def factorize(current: Long, divisor: Long): Long = {
+      if (divisor * divisor > current) current // No further divisors, current is the largest prime factor
+      else if (current % divisor == 0) factorize(current / divisor, divisor) // Divide out the divisor
+      else factorize(current, divisor + 1) // Try the next possible divisor
     }
 
-    if (num > 1) {
-      largestFactor = num
-    }
-
-    largestFactor
+    factorize(n, 2)
   }
 
   def main(args: Array[String]): Unit = {
@@ -26,4 +15,3 @@ object LargestPrimeFactor {
     println(s"The largest prime factor of $n is ${largestPrimeFactor(n)}")
   }
 }
-
